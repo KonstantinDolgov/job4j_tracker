@@ -20,13 +20,17 @@ public class PassportValidator {
         for (char symbol : passArray) {
             if (Character.isDigit(symbol)) {
                 digits++;
-            }
-            if (!Character.isDigit(symbol) && !Character.isLetter(symbol)) {
-                specials++;
+                break;
             }
         }
         if (digits == 0) {
             throw new IllegalArgumentException("Must have an digit");
+        }
+        for (char symbol : passArray) {
+            if (!Character.isDigit(symbol) && !Character.isLetter(symbol)) {
+                specials++;
+                break;
+            }
         }
         if (specials == 0) {
             throw new IllegalArgumentException("Must have an special symbol");
