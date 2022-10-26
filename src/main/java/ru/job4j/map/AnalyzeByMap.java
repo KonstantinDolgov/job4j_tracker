@@ -34,13 +34,12 @@ public class AnalyzeByMap {
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
         List<Label> rsl = new ArrayList<>();
         Map<String, Integer> temp = new LinkedHashMap<>();
-        List<Subject> subjectList = pupils.get(0).subjects();
-        for (int i = 0; i < subjectList.size(); i++) {
-            int sum = 0;
-            for (Pupil pupil : pupils) {
-                sum += pupil.subjects().get(i).score();
+        for (Pupil pupil : pupils) {
+            for (Subject subject : pupil.subjects()) {
+                int sum = temp.getOrDefault(subject.name(), 0);
+                sum += subject.score();
+                temp.put(subject.name(), sum);
             }
-            temp.put(subjectList.get(i).name(), sum);
         }
         for (Map.Entry<String, Integer> entry : temp.entrySet()) {
             rsl.add(new Label(entry.getKey(), entry.getValue() / pupils.size()));
@@ -64,13 +63,12 @@ public class AnalyzeByMap {
     public static Label bestSubject(List<Pupil> pupils) {
         List<Label> rsl = new ArrayList<>();
         Map<String, Integer> temp = new LinkedHashMap<>();
-        List<Subject> subjectList = pupils.get(0).subjects();
-        for (int i = 0; i < subjectList.size(); i++) {
-            int sum = 0;
-            for (Pupil pupil : pupils) {
-                sum += pupil.subjects().get(i).score();
+        for (Pupil pupil : pupils) {
+            for (Subject subject : pupil.subjects()) {
+                int sum = temp.getOrDefault(subject.name(), 0);
+                sum += subject.score();
+                temp.put(subject.name(), sum);
             }
-            temp.put(subjectList.get(i).name(), sum);
         }
         for (Map.Entry<String, Integer> entry : temp.entrySet()) {
             rsl.add(new Label(entry.getKey(), entry.getValue()));
