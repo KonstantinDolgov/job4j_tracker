@@ -4,15 +4,18 @@ import java.util.*;
 
 public class Departments {
 
+    @SuppressWarnings("checkstyle:WhitespaceAround")
     public static List<String> fillGaps(List<String> deps) {
         Set<String> tmp = new LinkedHashSet<>();
         for (String value : deps) {
             String start = "";
-            for (String el : value.split("/s")) {
-                tmp.add(start + el);
-            }
-            for (String el : value.split("/", 1)) {
-                tmp.add(start + el);
+            for (String el : value.split("/")) {
+                if (start.equals("")) {
+                    tmp.add(start + el);
+                    start = el;
+                } else {
+                    tmp.add(start + "/" + el);
+                }
             }
         }
         return new ArrayList<>(tmp);
