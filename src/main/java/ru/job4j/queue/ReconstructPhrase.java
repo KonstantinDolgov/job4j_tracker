@@ -1,6 +1,5 @@
 package ru.job4j.queue;
 
-import java.io.Serializable;
 import java.util.Deque;
 import java.util.Iterator;
 
@@ -18,7 +17,11 @@ public class ReconstructPhrase {
         StringBuilder str = new StringBuilder();
         int size = evenElements.size();
         for (int i = 0; i < size; i++) {
-            Serializable rsl = i % 2 == 0 ? str.append(evenElements.pop()) : evenElements.poll();
+            if (i % 2 == 0) {
+                str.append(evenElements.pop());
+            } else {
+                evenElements.poll();
+            }
         }
         return String.valueOf(str);
     }
